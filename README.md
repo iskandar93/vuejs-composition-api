@@ -37,3 +37,10 @@ $ npm run dev
 
 ### Composition API Setup
 https://vuejs.org/api/composition-api-setup.html
+
+### Refs API Docs
+https://vuejs.org/api/reactivity-core.html#ref
+https://vuejs.org/guide/extras/composition-api-faq.html#reactive-variables-with-ref
+
+### Primitive JavaScript
+https://developer.mozilla.org/en-US/docs/Glossary/Primitive

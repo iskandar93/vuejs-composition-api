@@ -1,12 +1,20 @@
 <script>
   import Meal from './components/Meal.vue';
+  import { ref } from "vue";
 
   export default {
 
     components: { Meal },
 
     setup() {
-      const name = "The Ramly Burger"
+      //--------------------------------------
+      const name = ref("The Ramly Burger")
+      //Always use .value when accessing or mutating the value
+      // name.value = 'Hello from the setup function'
+
+      //--------------------------------------
+      // let name = ref("The Ramly Burger")
+      // name = 'Hello from the setup function'
 
       // function placeOrder() {
       //   alert("Your order has been placed!")
@@ -25,6 +33,7 @@
   <div>
     <h1>{{ name }}</h1>
 
+    <input type="text" v-model="name" />
     <button @click="placeOrder">Place Order</button>
 
     <Meal name="Hamburger 🍔" :price="5" @addToCart="addItemToCart" />
