@@ -1,5 +1,9 @@
 <script>
+  import Meal from './components/Meal.vue';
+
   export default {
+
+    components: { Meal },
 
     setup() {
       const name = "The Ramly Burger"
@@ -9,8 +13,9 @@
       // }
 
       const placeOrder = () => alert("Your order has been placed!")
+      const addItemToCart = (item) => alert(`One ${item} to the cart!`)
 
-      return { name, placeOrder } // To be access outside setup
+      return { name, placeOrder, addItemToCart} // To be access outside setup
     },
 
   }
@@ -21,6 +26,8 @@
     <h1>{{ name }}</h1>
 
     <button @click="placeOrder">Place Order</button>
+
+    <Meal name="Hamburger 🍔" :price="5" @addToCart="addItemToCart" />
 
   </div>
 </template>
