@@ -1,6 +1,6 @@
 <script>
   import Meal from './components/Meal.vue';
-  import { ref } from "vue";
+  import { ref, reactive } from "vue";
 
   export default {
 
@@ -9,6 +9,9 @@
     setup() {
       //--------------------------------------
       const name = ref("The Ramly Burger")
+
+      const meal = reactive({ name: 'Hamburger 🍔', price: 5 })
+      // console.log(meal.name)
       //Always use .value when accessing or mutating the value
       // name.value = 'Hello from the setup function'
 
@@ -23,7 +26,7 @@
       const placeOrder = () => alert("Your order has been placed!")
       const addItemToCart = (item) => alert(`One ${item} to the cart!`)
 
-      return { name, placeOrder, addItemToCart} // To be access outside setup
+      return { name, placeOrder, addItemToCart, meal} // To be access outside setup
     },
 
   }
@@ -36,7 +39,7 @@
     <input type="text" v-model="name" />
     <button @click="placeOrder">Place Order</button>
 
-    <Meal name="Hamburger 🍔" :price="5" @addToCart="addItemToCart" />
+    <Meal :name="meal.name" :price="meal.price" @addToCart="addItemToCart" />
 
   </div>
 </template>
