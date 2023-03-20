@@ -7,47 +7,65 @@
     </p>
 </template>
 
-<script>
+<script setup>
+const props = defineProps({
+    name: String,
+    price: Number,
+})
+
+const emit = defineEmits(['addToCart'])
+
 import MealPrice from './MealPrice.vue';
 
-export default {
+const addToCart = () => emit("addToCart", props.name)
 
-    components: { MealPrice }, // Register component
+// export default {
 
-    props: {
-        name: String,
-        price: Number,
-    },
+//     components: { MealPrice }, // Register component
 
-    setup(props, { emit }) {
-        // console.log(props.name)
-        // console.log(props.price)
+//     props: {
+//         name: String,
+//         price: Number,
+//     },
 
-        const addToCart = () => emit("addToCart", props.name)
+//     setup(props, { emit }) {
+//         // console.log(props.name)
+//         // console.log(props.price)
 
-        // const pricePretty = computed({
+//         const addToCart = () => emit("addToCart", props.name)
+
+//         // const pricePretty = computed({
             
-        //     get() {
-        //         return `$${props.price.toFixed(2)}`
-        //     },
+//         //     get() {
+//         //         return `$${props.price.toFixed(2)}`
+//         //     },
             
-        //     set(price) {
-        //         alert(`Sorry, we can not accept ${price}. Nice try!`)
-        //     }
+//         //     set(price) {
+//         //         alert(`Sorry, we can not accept ${price}. Nice try!`)
+//         //     }
 
-        // })
+//         // })
 
-        // const pricePrettySentence = computed(
-        //     () => `The price of this item is ${pricePretty.value}`
-        // )
+//         // const pricePrettySentence = computed(
+//         //     () => `The price of this item is ${pricePretty.value}`
+//         // )
 
-        return { addToCart }
-    },
+//         return { addToCart }
+//     },
 
-    // computed: {
-    //     pricePretty() {
-    //         return `$${this.price.toFixed(2)}`
-    //     }
-    // }  // Option API
-}
+//     // computed: {
+//     //     pricePretty() {
+//     //         return `$${this.price.toFixed(2)}`
+//     //     }
+//     // }  // Option API
+// }
 </script>
+
+// <script>
+// export default {
+//     props: {
+//         name: String,
+//         price: Number,
+//     },
+// }
+// </script>

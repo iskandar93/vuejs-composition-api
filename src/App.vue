@@ -1,80 +1,82 @@
-<script>
+<script setup>
   import Meal from './components/Meal.vue';
   import { ref, reactive, watch, watchEffect, provide, onMounted } from "vue";
 
-  export default {
+  const currencySymbol = ref("$")
+  provide("currencySymbol", currencySymbol)
 
-    components: { Meal },
+  const name = ref("The Ramly Burger")
 
-    setup() {
-      const currencySymbol = ref("$")
-      provide("currencySymbol", currencySymbol)
+  const cart = reactive([])
+  // const cart = ref([])
 
-      const name = ref("The Ramly Burger")
+  const meal = reactive({ name: 'Hamburger 🍔', price: 5 })
 
-      const cart = reactive([])
-      // const cart = ref([])
+  const meals = reactive([
+    { name: 'Hamburger 🍔', price: 5 },
+    { name: 'Cheeseburger 🧀', price: 2 },
+    { name: 'Hotdog 🌭', price: 10 },
+    { name: 'Fries 🍟', price: 20 },
+  ])
 
-      const meal = reactive({ name: 'Hamburger 🍔', price: 5 })
+  // console.log(meal.name)
+  //Always use .value when accessing or mutating the value
+  // name.value = 'Hello from the setup function'
 
-      const meals = reactive([
-        { name: 'Hamburger 🍔', price: 5 },
-        { name: 'Cheeseburger 🧀', price: 2 },
-        { name: 'Hotdog 🌭', price: 10 },
-        { name: 'Fries 🍟', price: 20 },
-      ])
+  //--------------------------------------
+  // let name = ref("The Ramly Burger")
+  // name = 'Hello from the setup function'
 
-      // console.log(meal.name)
-      //Always use .value when accessing or mutating the value
-      // name.value = 'Hello from the setup function'
+  // function placeOrder() {
+  //   alert("Your order has been placed!")
+  // }
 
-      //--------------------------------------
-      // let name = ref("The Ramly Burger")
-      // name = 'Hello from the setup function'
+  const placeOrder = () => alert("Your order has been placed!")
+  const addItemToCart = (item) => cart.push(item)
+  // const addItemToCart = (item) => cart.value.push(item)
 
-      // function placeOrder() {
-      //   alert("Your order has been placed!")
-      // }
+  // Watch reactive object or array will always return a reference to a current value
+  // Not right, because when add to cart, the old value should be not appear
+  // watch(cart.value, (newValue, oldValue) => console.log(newValue, oldValue)) 
 
-      const placeOrder = () => alert("Your order has been placed!")
-      const addItemToCart = (item) => cart.push(item)
-      // const addItemToCart = (item) => cart.value.push(item)
+  // // This is good
+  // watch(
+  //   [name, () => [...cart]], 
+  //   (newValue, oldValue) => console.log(newValue, oldValue)
+  // ) 
 
-      // Watch reactive object or array will always return a reference to a current value
-      // Not right, because when add to cart, the old value should be not appear
-      // watch(cart.value, (newValue, oldValue) => console.log(newValue, oldValue)) 
+  const removeWatcher = watch([() => [...cart]], (newValue, oldValue) => 
+    alert(newValue.join("\n"))
+  ) 
 
-      // // This is good
-      // watch(
-      //   [name, () => [...cart]], 
-      //   (newValue, oldValue) => console.log(newValue, oldValue)
-      // ) 
+  // const removeWatcher = watchEffect(() => alert(cart.join("\n"))) 
 
-      const removeWatcher = watch([() => [...cart]], (newValue, oldValue) => 
-        alert(newValue.join("\n"))
-      ) 
+  // watch(name, (newName, oldName) => console.log(newName, oldName), {
+  //   immediate: true, // The watcher won't wait until the data changes the first time to run and fire immidiately
+  //   // deep: true // Allow to watch deeply nested data in object
+  // })
 
-      // const removeWatcher = watchEffect(() => alert(cart.join("\n"))) 
+  onMounted(() => {
+    console.log(name.value)
+  })
 
-      // watch(name, (newName, oldName) => console.log(newName, oldName), {
-      //   immediate: true, // The watcher won't wait until the data changes the first time to run and fire immidiately
-      //   // deep: true // Allow to watch deeply nested data in object
-      // })
 
-      onMounted(() => {
-        console.log(name.value)
-      })
+  // export default {
 
-      return { name, cart, placeOrder, addItemToCart, meal, meals, removeWatcher, currencySymbol} // To be access outside setup
-    },
+  //   components: { Meal },
 
-    // watch: {
-    //   name(newName, oldName) {
-    //     console.log(newName, oldName)
-    //   }
-    // } Option API
+  //   setup() {
+      
+  //     return { name, cart, placeOrder, addItemToCart, meal, meals, removeWatcher, currencySymbol} // To be access outside setup
+  //   },
 
-  }
+  //   // watch: {
+  //   //   name(newName, oldName) {
+  //   //     console.log(newName, oldName)
+  //   //   }
+  //   // } Option API
+
+  // }
 </script>
 
 <template>
