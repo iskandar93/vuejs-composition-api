@@ -1,13 +1,15 @@
 <script>
   import Meal from './components/Meal.vue';
-  import { ref, reactive, watch, watchEffect } from "vue";
+  import { ref, reactive, watch, watchEffect, provide } from "vue";
 
   export default {
 
     components: { Meal },
 
     setup() {
-      //--------------------------------------
+      const currencySymbol = ref("$")
+      // provide("currencySymbol", currencySymbol)
+
       const name = ref("The Ramly Burger")
 
       const cart = reactive([])
@@ -59,7 +61,7 @@
       //   // deep: true // Allow to watch deeply nested data in object
       // })
 
-      return { name, cart, placeOrder, addItemToCart, meal, meals, removeWatcher} // To be access outside setup
+      return { name, cart, placeOrder, addItemToCart, meal, meals, removeWatcher, currencySymbol} // To be access outside setup
     },
 
     // watch: {
@@ -78,6 +80,13 @@
     <input type="text" v-model="name" />
     <button @click="placeOrder">Place Order</button>
     <button @click="removeWatcher">Hide Cart Alerts</button>
+    <br><br>
+
+    <label for="currencySymbol"></label>
+    <select id="currencySymbol" v-model="currencySymbol">
+      <option value="$">Dollar ($)</option>
+      <option value="￡">Pound (￡)</option>
+    </select>
 
     <Meal 
       v-for="meal in meals" 

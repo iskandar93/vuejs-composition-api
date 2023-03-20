@@ -1,20 +1,22 @@
 <template>
     <p>
         <strong>{{ name }}</strong>
-        {{ pricePretty }}
+        <MealPrice :price="price" />
         <!-- <input type="text" v-model="pricePretty" /> -->
         <button @click="addToCart">Add To Cart</button>
     </p>
 </template>
 
 <script>
-import { computed } from 'vue';
+import MealPrice from './MealPrice.vue';
 
 export default {
 
+    components: { MealPrice }, // Register component
+
     props: {
         name: String,
-        price: Number
+        price: Number,
     },
 
     setup(props, { emit }) {
@@ -22,7 +24,7 @@ export default {
         // console.log(props.price)
 
         const addToCart = () => emit("addToCart", props.name)
-        const pricePretty = computed(() => `$${props.price.toFixed(2)}`)
+
         // const pricePretty = computed({
             
         //     get() {
@@ -39,7 +41,7 @@ export default {
         //     () => `The price of this item is ${pricePretty.value}`
         // )
 
-        return { addToCart, pricePretty }
+        return { addToCart }
     },
 
     // computed: {
