@@ -8,7 +8,7 @@
 
     setup() {
       const currencySymbol = ref("$")
-      // provide("currencySymbol", currencySymbol)
+      provide("currencySymbol", currencySymbol)
 
       const name = ref("The Ramly Burger")
 
