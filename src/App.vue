@@ -1,6 +1,6 @@
 <script>
   import Meal from './components/Meal.vue';
-  import { ref, reactive, watch, watchEffect, provide } from "vue";
+  import { ref, reactive, watch, watchEffect, provide, onMounted } from "vue";
 
   export default {
 
@@ -60,6 +60,10 @@
       //   immediate: true, // The watcher won't wait until the data changes the first time to run and fire immidiately
       //   // deep: true // Allow to watch deeply nested data in object
       // })
+
+      onMounted(() => {
+        console.log(name.value)
+      })
 
       return { name, cart, placeOrder, addItemToCart, meal, meals, removeWatcher, currencySymbol} // To be access outside setup
     },
