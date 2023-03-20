@@ -1,6 +1,6 @@
 <script>
   import Meal from './components/Meal.vue';
-  import { ref, reactive, watch } from "vue";
+  import { ref, reactive, watch, watchEffect } from "vue";
 
   export default {
 
@@ -51,6 +51,8 @@
       const removeWatcher = watch([() => [...cart]], (newValue, oldValue) => 
         alert(newValue.join("\n"))
       ) 
+
+      // const removeWatcher = watchEffect(() => alert(cart.join("\n"))) 
 
       // watch(name, (newName, oldName) => console.log(newName, oldName), {
       //   immediate: true, // The watcher won't wait until the data changes the first time to run and fire immidiately
